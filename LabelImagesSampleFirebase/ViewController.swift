@@ -19,9 +19,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     var imagePicker : UIImagePickerController? = UIImagePickerController()
 
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     // [START config_label]
-    let options = VisionLabelDetectorOptions(confidenceThreshold: 0.7)
+//    let options = VisionLabelDetectorOptions(confidenceThreshold: 0.7)
+    
+    let options : VisionCloudDetectorOptions = {
+        let options = VisionCloudDetectorOptions()
+        options.modelType = .latest
+        options.maxResults = 20
+        return options
+    }()
+
+    
+    
     // [END config_label]
 
     override func viewDidLoad() {
@@ -29,6 +41,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.imageView.image = UIImage(named: "sample")
         loadLabels(imageToEvaluate: imageView.image!)
         imagePicker?.delegate = self;
+        
+        activityIndicator.hidesWhenStopped = true;
+        activityIndicator.center = view.center;
 
     }
 
@@ -38,45 +53,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
-    
     func loadLabels(imageToEvaluate: UIImage){
 
-        self.imageView.image = imageToEvaluate
         self.result.text = "";
-        let labelDetector = vision.labelDetector(options: self.options)
-        
+
+        self.imageView.image = imageToEvaluate
+//        let labelDetector = vision.labelDetector(options: self.options)
+        let labelDetector = Vision.vision().cloudLabelDetector(options: options)
         let visionImage = VisionImage(image: imageToEvaluate)
-        let metadata = VisionImageMetadata()
         
-        print(imageToEvaluate.imageOrientation.rawValue)
-//        if(imageToEvaluate.imageOrientation.rawValue == 0){
-//            metadata.orientation = .leftTop
-//        }
-//        metadata.orientation = .rightTop
         
-//        let image = VisionImage(buffer: bufferRef)
-//        image.metadata = metadata
-        
-        labelDetector.detect(in: visionImage) { (labels, error) in
-            guard error == nil, let labels = labels, !labels.isEmpty else {
-                return
+        self.activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            labelDetector.detect(in: visionImage) { (labels, error) in
+                guard error == nil, let labels = labels, !labels.isEmpty else {
+                    return
+                }
+                
+
+                var labelText : String? = ""
+                var confidence: NSNumber? = 0
+                var entityToPrint : String? = ""
+                for label in labels {
+                    labelText = label.label!
+    //                var entityId = label.entityID
+                    confidence = label.confidence
+
+                    confidence = NSNumber(value: round((confidence?.doubleValue)! * 100))
+                    entityToPrint = " \(labelText!) - \(confidence!)% \n"
+                    self.result.text.append(entityToPrint!)
+                }
+                self.activityIndicator.stopAnimating()
             }
             
-            for label in labels {
-                let labelText = label.label
-                let entityId = label.entityID
-                let confidence = label.confidence
-                
-                print("Label text: ", labelText)
-                print("entityId: ", entityId)
-                print("confidence: ", confidence)
-                
-                let entityToPrint = " \(labelText) - \(confidence) \n"
-                self.result.text.append(entityToPrint)
-            }
         }
-        
     }
+    
+    
+    // INTERACCIONES DEL USUARIO
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)

@@ -43,7 +43,7 @@
                                             <action selector="openCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nh2-Yc-EZg"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2QL-XK-FlR">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2QL-XK-FlR">
                                         <rect key="frame" x="0.0" y="-17" width="375" height="122"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -51,7 +51,7 @@
                                             <constraint firstAttribute="height" constant="122" id="ul4-vY-Esv"/>
                                         </constraints>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
@@ -71,13 +71,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cB6-dm-Tum">
                                 <rect key="frame" x="0.0" y="40" width="375" height="439"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gu5-Iw-d1m">
+                                <rect key="frame" x="88" y="234" width="200" height="200"/>
+                                <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="EW5-gE-aBx"/>
+                                    <constraint firstAttribute="width" constant="200" id="gTT-3O-FrX"/>
+                                </constraints>
+                                <color key="color" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="roQ-MB-kBt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Jd-1v-uTR"/>
+                            <constraint firstItem="gu5-Iw-d1m" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="4OJ-mM-iW6"/>
                             <constraint firstItem="cB6-dm-Tum" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="IeQ-oI-80v"/>
                             <constraint firstItem="cB6-dm-Tum" firstAttribute="trailing" secondItem="roQ-MB-kBt" secondAttribute="trailing" id="ME5-fC-jYf"/>
                             <constraint firstItem="roQ-MB-kBt" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="R7k-i2-qBl"/>
+                            <constraint firstItem="gu5-Iw-d1m" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RH1-YH-usW"/>
                             <constraint firstItem="roQ-MB-kBt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jtF-7m-UKw"/>
                             <constraint firstItem="roQ-MB-kBt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="467" id="oWy-rb-wEK"/>
                             <constraint firstItem="cB6-dm-Tum" firstAttribute="leading" secondItem="roQ-MB-kBt" secondAttribute="leading" id="rWD-Tb-7KN"/>
@@ -86,6 +97,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="gu5-Iw-d1m" id="wsR-rJ-hjB"/>
                         <outlet property="imageView" destination="cB6-dm-Tum" id="qGT-39-KO1"/>
                         <outlet property="result" destination="2QL-XK-FlR" id="X96-kw-Tg6"/>
                     </connections>
