@@ -60,29 +60,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.result.text = "";
 
         self.activityIndicator.startAnimating()
-        
-            labelDetector.detect(in: visionImage) { (labels, error) in
-                guard error == nil, let labels = labels, !labels.isEmpty else {
-                    self.result.text = "Error!";
-                    self.activityIndicator.stopAnimating()
-                    return
-                }
-                
-                var labelText : String? = ""
-                var confidence: NSNumber? = 0
-                var entityToPrint : String? = ""
-                for label in labels {
-                    labelText = label.label!
-                    //                var entityId = label.entityID
-                    confidence = label.confidence
-                    
-                    confidence = NSNumber(value: round((confidence?.doubleValue)! * 100))
-                    entityToPrint = " \(labelText!) - \(confidence!)% \n"
-                    self.result.text.append(entityToPrint!)
-                }
+        self.switchCloudOption.isEnabled = false
+        labelDetector.detect(in: visionImage) { (labels, error) in
+            guard error == nil, let labels = labels, !labels.isEmpty else {
+                self.result.text = "Error!";
                 self.activityIndicator.stopAnimating()
-                
+                self.switchCloudOption.isEnabled = true
+                return
             }
+            
+            var labelText : String? = ""
+            var confidence: NSNumber? = 0
+            var entityToPrint : String? = ""
+            for label in labels {
+                labelText = label.label!
+                //                var entityId = label.entityID
+                confidence = label.confidence
+                
+                confidence = NSNumber(value: round((confidence?.doubleValue)! * 100))
+                entityToPrint = " \(labelText!) - \(confidence!)% \n"
+                self.result.text.append(entityToPrint!)
+            }
+            self.activityIndicator.stopAnimating()
+            self.switchCloudOption.isEnabled = true
+        }
         
     }
     
@@ -103,25 +104,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let visionImage = VisionImage(image: imageToEvaluate)
         
         self.activityIndicator.startAnimating()
-      
-            labelDetector.detect(in: visionImage) { (labels, error) in
-                guard error == nil, let labels = labels, !labels.isEmpty else {
-                    return
-                }
-                
-                var labelText : String? = ""
-                var confidence: NSNumber? = 0
-                var entityToPrint : String? = ""
-                for label in labels {
-                    labelText = label.label
-//                    var entityId = label.entityID
-                    confidence = label.confidence as NSNumber
-                    confidence = NSNumber(value: round((confidence?.doubleValue)! * 100))
-                    entityToPrint = " \(labelText!) - \(confidence!)% \n"
-                    self.result.text.append(entityToPrint!)
-                }
-                self.activityIndicator.stopAnimating()
+        self.switchCloudOption.isEnabled = false
+        
+        labelDetector.detect(in: visionImage) { (labels, error) in
+            guard error == nil, let labels = labels, !labels.isEmpty else {
+                return
             }
+            
+            var labelText : String? = ""
+            var confidence: NSNumber? = 0
+            var entityToPrint : String? = ""
+            for label in labels {
+                labelText = label.label
+//                    var entityId = label.entityID
+                confidence = label.confidence as NSNumber
+                confidence = NSNumber(value: round((confidence?.doubleValue)! * 100))
+                entityToPrint = " \(labelText!) - \(confidence!)% \n"
+                self.result.text.append(entityToPrint!)
+            }
+            self.activityIndicator.stopAnimating()
+            self.switchCloudOption.isEnabled = true
+        }
     
     }
     
