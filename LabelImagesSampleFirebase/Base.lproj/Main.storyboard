@@ -54,16 +54,32 @@
                                         <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YaW-mX-xWT">
+                                        <rect key="frame" x="195" y="120" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="changeCloudOption:" destination="BYZ-38-t0r" eventType="valueChanged" id="T8s-kj-4S6"/>
+                                        </connections>
+                                    </switch>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cloud" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IP-Xw-1Lu">
+                                        <rect key="frame" x="129" y="125" width="43" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="2QL-XK-FlR" secondAttribute="trailing" id="5tY-Ap-0O7"/>
+                                    <constraint firstItem="0IP-Xw-1Lu" firstAttribute="leading" secondItem="roQ-MB-kBt" secondAttribute="leading" constant="129" id="9RH-Kw-4ko"/>
                                     <constraint firstAttribute="height" constant="180" id="Ac8-lh-JJp"/>
                                     <constraint firstAttribute="bottom" secondItem="2QL-XK-FlR" secondAttribute="bottom" constant="75" id="DxH-pY-XgK"/>
                                     <constraint firstAttribute="bottom" secondItem="7uf-3H-OeM" secondAttribute="bottom" constant="20" id="F8M-iP-5u1"/>
                                     <constraint firstAttribute="trailing" secondItem="T8m-fs-IX8" secondAttribute="trailing" constant="20" id="HjQ-A1-9P7"/>
                                     <constraint firstItem="2QL-XK-FlR" firstAttribute="leading" secondItem="roQ-MB-kBt" secondAttribute="leading" id="Hsz-gN-6Rq"/>
                                     <constraint firstAttribute="width" constant="375" id="K1k-Jf-pB1"/>
+                                    <constraint firstAttribute="bottom" secondItem="0IP-Xw-1Lu" secondAttribute="bottom" constant="34" id="S1b-tp-Oif"/>
+                                    <constraint firstAttribute="trailing" secondItem="YaW-mX-xWT" secondAttribute="trailing" constant="131" id="VrN-DK-tPO"/>
+                                    <constraint firstAttribute="bottom" secondItem="YaW-mX-xWT" secondAttribute="bottom" constant="29" id="dRB-61-vEV"/>
                                     <constraint firstItem="7uf-3H-OeM" firstAttribute="leading" secondItem="roQ-MB-kBt" secondAttribute="leading" constant="20" id="eyg-In-Xp1"/>
                                     <constraint firstAttribute="bottom" secondItem="T8m-fs-IX8" secondAttribute="bottom" constant="20" id="qEq-PV-x6s"/>
                                 </constraints>
@@ -100,6 +116,7 @@
                         <outlet property="activityIndicator" destination="gu5-Iw-d1m" id="wsR-rJ-hjB"/>
                         <outlet property="imageView" destination="cB6-dm-Tum" id="qGT-39-KO1"/>
                         <outlet property="result" destination="2QL-XK-FlR" id="X96-kw-Tg6"/>
+                        <outlet property="switchCloudOption" destination="YaW-mX-xWT" id="sZ0-hW-YXD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
